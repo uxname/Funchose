@@ -8,5 +8,5 @@ export interface ICheckerResult {
 export interface IChecker {
     name: string;
     priority: number;
-    containData: (data: string) => Promise<ICheckerResult>;
+    containData: (data: string, placeholder: string) => Promise<ICheckerResult>;
 }
