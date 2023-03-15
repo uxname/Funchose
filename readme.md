@@ -1,4 +1,4 @@
-# Funchose
+# Funchose - Clear Your Data
 
 Funchose is a Node.js and TypeScript-based project that allows you to filter private and sensitive information from
 various data sources. It can be used to check application logs, databases, and other data sources, and returns filtered
