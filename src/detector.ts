@@ -8,7 +8,7 @@ export class Detector {
     }
 
     async detect(data: string): Promise<ICheckerResult> {
-        const promiseArray = this.checkers.map((checker) => checker.containData(data));
+        const promiseArray = this.checkers.map((checker) => checker.containData(data, '***'));
         return Promise.any(promiseArray);
     }
 }
