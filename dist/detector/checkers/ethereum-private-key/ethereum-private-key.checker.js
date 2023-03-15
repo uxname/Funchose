@@ -14,4 +14,4 @@ class EthereumPrivateKeyChecker {
     }
 }
 exports.EthereumPrivateKeyChecker = EthereumPrivateKeyChecker;
-//# sourceMappingURL=ethereum-private-key.checker.js.map
+//# sourceMappingURL=evm-private-key.checker.js.map

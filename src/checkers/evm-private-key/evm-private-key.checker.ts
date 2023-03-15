@@ -1,6 +1,6 @@
-import {IChecker, ICheckerResult} from '@/detector/interfaces/i-checker';
+import {IChecker, ICheckerResult} from '@/interfaces/i-checker';
 
-export class EthereumPrivateKeyChecker implements IChecker {
+export class EvmPrivateKeyChecker implements IChecker {
     name: string;
     priority: number;
 
