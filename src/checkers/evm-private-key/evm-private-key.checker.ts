@@ -1,8 +1,8 @@
 import { IChecker, ICheckerResult } from '@/interfaces/i-checker';
 
 export class EvmPrivateKeyChecker implements IChecker {
-  name: string;
-  priority: number;
+  name = 'EVM private key checker';
+  priority = 1;
 
   constructor(private readonly placeholder: string) {}
 
@@ -18,6 +18,7 @@ export class EvmPrivateKeyChecker implements IChecker {
     return {
       checkerName: this.name,
       trigger: false,
+      processedValue: data,
     };
   }
 }
