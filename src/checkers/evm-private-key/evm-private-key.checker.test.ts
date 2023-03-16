@@ -4,7 +4,9 @@ describe('EVM checker', () => {
   let checker: EvmPrivateKeyChecker;
 
   beforeAll(() => {
-    checker = new EvmPrivateKeyChecker();
+    checker = new EvmPrivateKeyChecker(
+      '!!! EVM private replaced by Funchose !!!',
+    );
   });
 
   test('should filter one private key', async () => {

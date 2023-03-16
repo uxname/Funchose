@@ -4,16 +4,15 @@ export class EvmPrivateKeyChecker implements IChecker {
   name: string;
   priority: number;
 
-  async containData(
-    data: string,
-    placeholder = '***',
-  ): Promise<ICheckerResult> {
+  constructor(private readonly placeholder: string) {}
+
+  async containData(data: string): Promise<ICheckerResult> {
     const regex = new RegExp(/(0x)?[\dA-Fa-f]{64}/g);
     if (regex.test(data)) {
       return {
         checkerName: this.name,
         trigger: true,
-        processedValue: data.replaceAll(regex, placeholder),
+        processedValue: data.replaceAll(regex, this.placeholder),
       };
     }
     return {
