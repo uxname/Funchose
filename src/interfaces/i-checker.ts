@@ -1,12 +1,13 @@
+// eslint-disable-next-line unicorn/prevent-abbreviations
 export interface ICheckerResult {
-    checkerName: string;
-    trigger: boolean;
-    reason?: string;
-    processedValue?: string;
+  checkerName: string;
+  trigger: boolean;
+  reason?: string;
+  processedValue?: string;
 }
 
 export interface IChecker {
-    name: string;
-    priority: number;
-    containData: (data: string, placeholder: string) => Promise<ICheckerResult>;
+  name: string;
+  priority: number;
+  containData: (data: string, placeholder: string) => Promise<ICheckerResult>;
 }
