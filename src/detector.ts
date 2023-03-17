@@ -18,8 +18,8 @@ export class Detector {
     };
 
     for (const checker of this.checkers) {
-      const checkerResult: ICheckerResult = await checker.containData(data);
-      if (checkerResult.trigger) {
+      const checkerResult: ICheckerResult = await checker.processData(data);
+      if (checkerResult.triggered) {
         result.triggeredCheckers.push(checkerResult);
         result.processedValue = checkerResult.processedValue;
       }

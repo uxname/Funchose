@@ -1,24 +1,60 @@
-import { IChecker, ICheckerResult } from '@/interfaces/i-checker';
+import {
+  IChecker,
+  ICheckerReplaceFunctionParameters,
+  ICheckerResult,
+  IPart,
+} from '@/interfaces/i-checker';
 
 export class EvmPrivateKeyChecker implements IChecker {
   name = 'EVM private key checker';
   priority = 1;
 
-  constructor(private readonly placeholder: string) {}
+  constructor(
+    replaceFunction?: (
+      parameters: ICheckerReplaceFunctionParameters,
+    ) => Promise<string>,
+  ) {
+    if (replaceFunction) {
+      this.replaceFunction = replaceFunction;
+    }
+  }
 
-  async containData(data: string): Promise<ICheckerResult> {
+  async processData(data: string): Promise<ICheckerResult> {
     const regex = new RegExp(/(0x)?[\dA-Fa-f]{64}/g);
     if (regex.test(data)) {
-      return {
-        checkerName: this.name,
-        trigger: true,
-        processedValue: data.replaceAll(regex, this.placeholder),
-      };
+      const foundParts: IPart[] | undefined = data
+        .match(regex)
+        ?.map((value) => ({
+          value,
+        }));
+      if (foundParts) {
+        return {
+          checkerName: this.name,
+          triggered: true,
+          processedValue: await this.replaceFunction({
+            sourceValue: data,
+            foundParts,
+          }),
+        };
+      }
     }
     return {
       checkerName: this.name,
-      trigger: false,
+      triggered: false,
       processedValue: data,
     };
+  }
+
+  async replaceFunction(
+    parameters: ICheckerReplaceFunctionParameters,
+  ): Promise<string> {
+    const PLACEHOLDER = '<Private_key_removed_by_Funchose>';
+
+    let processedValue = parameters.sourceValue;
+    for (const part of parameters.foundParts) {
+      processedValue = processedValue.replace(part.value, PLACEHOLDER);
+    }
+
+    return processedValue;
   }
 }
