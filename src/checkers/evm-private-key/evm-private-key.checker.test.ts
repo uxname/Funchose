@@ -86,7 +86,12 @@ describe('EVM checker', () => {
     const testDataB = generateEthereumPrivateKeysWithPrefix(
       CONST_NUMBER_OF_TESTS,
     );
-    const testData = [...testDataA, ...testDataB];
+    const testData = [
+      ...testDataA,
+      ...testDataB,
+      'test0x10407901cb518b309f733be88bd01d6083d00fe9e7e60e9fb2cc87ad3a415a1f',
+      'test10407901cb518b309f733be88bd01d6083d00fe9e7e60e9fb2cc87ad3a415a1ftest',
+    ];
     let triggeredCount = 0;
 
     for (const testDatum of testData) {
