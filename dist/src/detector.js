@@ -4,7 +4,7 @@ exports.Detector = void 0;
 class Detector {
     checkers;
     constructor(checkers) {
-        this.checkers = checkers.sort((a, b) => a.priority - b.priority);
+        this.checkers = checkers.sort((a, b) => a.priority() - b.priority());
     }
     async detect(data) {
         const result = {
@@ -15,7 +15,7 @@ class Detector {
             const checkerResult = await checker.processData(data);
             if (checkerResult.triggered) {
                 result.triggeredCheckers.push(checkerResult);
-                result.processedValue = checkerResult.processedValue;
+                result.processedValue = checkerResult.valueOut;
             }
         }
         return result;

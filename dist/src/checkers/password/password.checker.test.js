@@ -15,14 +15,14 @@ describe('Password checker', () => {
         const STRINGS_WITHOUT_PASSWORD = ['just a text', 'simple string'];
         for (const string of STRINGS_WITH_PASSWORD) {
             const result = await checker.processData(string);
-            console.log({ result });
             expect(result.triggered).toBe(true);
-            expect(result.processedValue).toBe('<String with password was removed by Password checker>');
+            expect(result.valueOut).not.toBe(string);
+            expect(result.valueOut).toContain('<Sensitive data was removed by Password checker>');
         }
         for (const string of STRINGS_WITHOUT_PASSWORD) {
             const result = await checker.processData(string);
             expect(result.triggered).toBe(false);
-            expect(result.processedValue).toBe(string);
+            expect(result.valueOut).toBe(string);
         }
     });
 });

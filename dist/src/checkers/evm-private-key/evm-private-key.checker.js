@@ -1,44 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EvmPrivateKeyChecker = void 0;
-class EvmPrivateKeyChecker {
-    name = 'EVM private key checker';
-    priority = 1;
-    constructor(replaceFunction) {
-        this.replaceFunction = this.replaceFunction || replaceFunction;
-    }
-    async processData(data) {
+const base_checker_1 = require("../../checkers/base/base.checker");
+class EvmPrivateKeyChecker extends base_checker_1.BaseChecker {
+    name = () => 'EVM private key checker';
+    priority = () => 1;
+    async detect(data) {
         const regex = new RegExp(/(0x)?[\dA-Fa-f]{64}/g);
         if (regex.test(data)) {
-            const foundParts = data
-                .match(regex)
-                ?.map((value) => ({
+            return (data.match(regex)?.map((value) => ({
                 value,
-            }));
-            if (foundParts) {
-                return {
-                    checkerName: this.name,
-                    triggered: true,
-                    processedValue: await this.replaceFunction({
-                        sourceValue: data,
-                        foundParts,
-                    }),
-                };
-            }
+                positionStart: data.indexOf(value),
+                positionEnd: data.indexOf(value) + value.length,
+            })) || []);
         }
-        return {
-            checkerName: this.name,
-            triggered: false,
-            processedValue: data,
-        };
-    }
-    async replaceFunction(parameters) {
-        const PLACEHOLDER = `<Private key was removed by ${this.name}>`;
-        let processedValue = parameters.sourceValue;
-        for (const part of parameters.foundParts) {
-            processedValue = processedValue.replace(part.value, PLACEHOLDER);
-        }
-        return processedValue;
+        return [];
     }
 }
 exports.EvmPrivateKeyChecker = EvmPrivateKeyChecker;

@@ -1,8 +1,7 @@
-import { IChecker, ICheckerReplaceFunctionParameters, ICheckerResult } from '../../interfaces/i-checker';
-export declare class EvmPrivateKeyChecker implements IChecker {
-    name: string;
-    priority: number;
-    constructor(replaceFunction?: (parameters: ICheckerReplaceFunctionParameters) => Promise<string>);
-    processData(data: string): Promise<ICheckerResult>;
-    replaceFunction(parameters: ICheckerReplaceFunctionParameters): Promise<string>;
+import { BaseChecker } from '../../checkers/base/base.checker';
+import { IFoundPart } from '../../checkers/base/i-base-checker';
+export declare class EvmPrivateKeyChecker extends BaseChecker {
+    name: () => string;
+    priority: () => number;
+    detect(data: string): Promise<Array<IFoundPart>>;
 }
