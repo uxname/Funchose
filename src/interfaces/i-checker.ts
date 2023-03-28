@@ -23,7 +23,7 @@ export interface ICheckerReplaceFunctionParameters {
 export interface IChecker {
   name: string;
   priority: number;
-  replaceFunction: (
+  replaceFunction?: (
     parameters: ICheckerReplaceFunctionParameters,
   ) => Promise<string>;
   processData: (data: string) => Promise<ICheckerResult>;

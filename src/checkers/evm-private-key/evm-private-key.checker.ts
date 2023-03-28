@@ -14,9 +14,7 @@ export class EvmPrivateKeyChecker implements IChecker {
       parameters: ICheckerReplaceFunctionParameters,
     ) => Promise<string>,
   ) {
-    if (replaceFunction) {
-      this.replaceFunction = replaceFunction;
-    }
+    this.replaceFunction = this.replaceFunction || replaceFunction;
   }
 
   async processData(data: string): Promise<ICheckerResult> {
@@ -48,7 +46,7 @@ export class EvmPrivateKeyChecker implements IChecker {
   async replaceFunction(
     parameters: ICheckerReplaceFunctionParameters,
   ): Promise<string> {
-    const PLACEHOLDER = '<Private_key_removed_by_Funchose>';
+    const PLACEHOLDER = `<Private key was removed by ${this.name}>`;
 
     let processedValue = parameters.sourceValue;
     for (const part of parameters.foundParts) {
