@@ -49,14 +49,16 @@ describe('EVM checker', () => {
   test('should filter one private key', async () => {
     const testDataInput1 =
       'test 0x10407901cb518b309f733be88bd01d6083d00fe9e7e60e9fb2cc87ad3a415a1f test';
-    const testDataOutput1 = 'test <Private_key_removed_by_Funchose> test';
+    const testDataOutput1 =
+      'test <Private key was removed by EVM private key checker> test';
     const result1 = await checker.processData(testDataInput1);
     expect(result1.processedValue).toEqual(testDataOutput1);
     expect(result1.triggered).toBe(true);
 
     const testDataInput2 =
       'test 10407901cb518b309f733be88bd01d6083d00fe9e7e60e9fb2cc87ad3a415a1f test';
-    const testDataOutput2 = 'test <Private_key_removed_by_Funchose> test';
+    const testDataOutput2 =
+      'test <Private key was removed by EVM private key checker> test';
     const result2 = await checker.processData(testDataInput2);
     expect(result2.processedValue).toEqual(testDataOutput2);
     expect(result2.triggered).toBe(true);
@@ -66,7 +68,7 @@ describe('EVM checker', () => {
     const testDataInput1 =
       'test 0x10407901cb518b309f733be88bd01d6083d00fe9e7e60e9fb2cc87ad3a415a1f test 0x20407901cb518b309f733be88bd01d6083d00fe9e7e60e9fb2cc87ad3a415a1f';
     const testDataOutput1 =
-      'test <Private_key_removed_by_Funchose> test <Private_key_removed_by_Funchose>';
+      'test <Private key was removed by EVM private key checker> test <Private key was removed by EVM private key checker>';
     const result1 = await checker.processData(testDataInput1);
     expect(result1.processedValue).toEqual(testDataOutput1);
     expect(result1.triggered).toBe(true);
