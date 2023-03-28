@@ -22,9 +22,9 @@ Then, in your Node.js application, you can import and use it like this:
 
 ```typescript
 import {Detector} from 'funchose';
-import {PasswordChecker} from 'funchose/checkers/evm-private-key/evm-private-key.checker';
+import {TemplateChecker} from 'funchose/checkers/evm-private-key/evm-private-key.checker';
 
-const detector = new Detector([new PasswordChecker()]);
+const detector = new Detector([new TemplateChecker()]);
 const filteredData = detector.filter('Your data here');
 console.log(filteredData);
 ```
