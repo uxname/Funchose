@@ -4,6 +4,9 @@ import { BaseChecker } from '@/checkers/base/base.checker';
 import { IFoundPart } from '@/checkers/base/i-base-checker';
 
 class TestChecker extends BaseChecker {
+  name = () => 'Test checker';
+  priority = () => 1;
+
   async detect(data: string): Promise<Array<IFoundPart>> {
     const SENSITIVE_DATA = 'secret';
     const foundParts: Array<IFoundPart> = [];
@@ -20,10 +23,6 @@ class TestChecker extends BaseChecker {
 
     return foundParts;
   }
-
-  name = () => 'Test checker';
-
-  priority = () => 1;
 }
 
 describe('Base checker', () => {
