@@ -8,7 +8,7 @@ export class Detector {
   checkers: IChecker[];
 
   constructor(checkers: IChecker[]) {
-    this.checkers = checkers.sort((a, b) => a.priority - b.priority);
+    this.checkers = checkers.sort((a, b) => a.priority() - b.priority());
   }
 
   async detect(data: string): Promise<IDetectorResult> {
@@ -21,7 +21,7 @@ export class Detector {
       const checkerResult: ICheckerResult = await checker.processData(data);
       if (checkerResult.triggered) {
         result.triggeredCheckers.push(checkerResult);
-        result.processedValue = checkerResult.processedValue;
+        result.processedValue = checkerResult.valueOut;
       }
     }
 

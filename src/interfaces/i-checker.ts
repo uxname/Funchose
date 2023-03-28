@@ -1,9 +1,12 @@
 // eslint-disable-next-line unicorn/prevent-abbreviations
+import { IFoundPart } from '@/checkers/base/i-base-checker';
+
 export interface ICheckerResult {
   checkerName: string;
   triggered: boolean;
-  reason?: string;
-  processedValue: string;
+
+  valueIn: string;
+  valueOut: string;
 }
 
 export interface IDetectorResult {
@@ -11,18 +14,17 @@ export interface IDetectorResult {
   processedValue: string;
 }
 
-export interface IPart {
-  value: string;
-}
-
 export interface ICheckerReplaceFunctionParameters {
   sourceValue: string;
-  foundParts: IPart[];
+  foundParts: IFoundPart[];
 }
 
-export interface IChecker {
-  name: string;
-  priority: number;
+export interface ICheckerInfo {
+  name: () => string;
+  priority: () => number;
+}
+
+export interface IChecker extends ICheckerInfo {
   replaceFunction?: (
     parameters: ICheckerReplaceFunctionParameters,
   ) => Promise<string>;

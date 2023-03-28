@@ -1,43 +1,46 @@
-import {
-  IChecker,
-  ICheckerReplaceFunctionParameters,
-  ICheckerResult,
-} from '@/interfaces/i-checker';
+import { BaseChecker } from '@/checkers/base/base.checker';
+import { IFoundPart } from '@/checkers/base/i-base-checker';
 
-export class PasswordChecker implements IChecker {
-  name = 'Password checker';
-  priority = 1;
+export class PasswordChecker extends BaseChecker {
+  name = () => 'Password checker';
+  priority = () => 1;
 
-  constructor(
-    replaceFunction?: (
-      parameters: ICheckerReplaceFunctionParameters,
-    ) => Promise<string>,
-  ) {
-    this.replaceFunction = this.replaceFunction || replaceFunction;
-  }
+  async detect(data: string): Promise<Array<IFoundPart>> {
+    const TRIGGER_WORDS = [
+      'password',
+      'pass',
+      'pwd',
+      'passwd',
+      'passphrase',
+      'passcode',
+      'pass key',
+      'secret',
+      'key',
+      'lock',
+      'unlock',
+      'authorization',
+      'credentials',
+      'pin',
+      'token',
+      'cipher',
+      'hash',
+      'salt',
+    ];
 
-  async processData(data: string): Promise<ICheckerResult> {
-    if (data.toLowerCase().includes('password')) {
-      return {
-        checkerName: this.name,
-        triggered: true,
-        processedValue: await this.replaceFunction({
-          sourceValue: data,
-          foundParts: [],
-        }),
-      };
+    const foundParts: Array<IFoundPart> = [];
+
+    for (const word of TRIGGER_WORDS) {
+      let position = data.indexOf(word);
+      while (position !== -1) {
+        foundParts.push({
+          value: word,
+          positionStart: position,
+          positionEnd: position + word.length,
+        });
+        position = data.indexOf(word, position + 1);
+      }
     }
-    return {
-      checkerName: this.name,
-      triggered: false,
-      processedValue: data,
-    };
-  }
 
-  async replaceFunction(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    parameters: ICheckerReplaceFunctionParameters,
-  ): Promise<string> {
-    return `<String with password was removed by ${this.name}>`;
+    return foundParts;
   }
 }
