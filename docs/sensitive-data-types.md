@@ -1,37 +1,40 @@
 # Sensitive data types
 
 1. Level (high risk)
-    - [ ] wallet seed phrases
-    - [x] wallet private keys
-    - [ ] ssh private keys
+    - [ ] Wallet seed phrases
+    - [x] Wallet private keys
+    - [ ] SSH private keys
     - [ ] RSA keys
-    - [x] passwords
-    - [ ] access tokens
-    - [ ] refresh tokens
-    - [ ] stripe tokens
-    - [ ] telegram token
-    - [ ] telegram bot token
-    - [ ] card number
+    - [x] Passwords
+    - [ ] Access tokens
+    - [ ] Refresh tokens
+    - [ ] Stripe tokens
+    - [ ] Telegram token
+    - [ ] Telegram bot token
+    - [ ] Credit card numbers
     - [ ] SWIFT numbers
     - [ ] IBAN numbers
     - [ ] Bank account details
     - [ ] Salt
-    - [ ] oAuth tokens
+    - [ ] OAuth tokens
     - [ ] AWS keys
-    - [ ] Cookie
+    - [ ] Cookies
+    - [ ] Biometric data
+
 2. Level (medium risk)
-    - [ ] Phone number
-    - [ ] Birthday dates
+    - [ ] Phone numbers
+    - [ ] Birth dates
     - [ ] Human names
-    - [ ] Offile addresses
-3. Level (low risk)
-    - [ ] TCP/UDP Ports
-    - [ ] IPv4/IPv6
-    - [ ] Mac addresses
-    - [ ] Email
+    - [ ] Physical addresses
+    - [ ] Email addresses
     - [ ] Passport data
-    - [ ] Telegram invite URL
-    - [ ] Discord invite URL
-    - [ ] Zoom invite URL
-    - [ ] Stacktrace
+
+3. Level (low risk)
+    - [ ] TCP/UDP ports
+    - [ ] IPv4/IPv6 addresses
+    - [ ] MAC addresses
+    - [ ] Telegram invite URLs
+    - [ ] Discord invite URLs
+    - [ ] Zoom invite URLs
+    - [ ] Stack traces
     - [ ] Absolute file paths
