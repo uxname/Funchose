@@ -1,4 +1,10 @@
 {
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "dist"
+  ],
   "compilerOptions": {
     "allowJs": true,
     "strict": true,
